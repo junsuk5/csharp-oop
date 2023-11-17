@@ -35,12 +35,41 @@ class SuperHero : Hero
     }
 }
 
-class Hero
+class Wizard: Character, ICharacter
+{
+    public override void Jump()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Walk()
+    {
+        throw new NotImplementedException();
+    }
+}
+interface ICharacter
+{
+    public void Jump();
+    public void Walk();
+}
+
+abstract class Character
+{
+    public String Name;
+    public int Hp;
+    
+    public void Run()
+    {
+        Console.WriteLine("우다다다");
+    }
+
+    public abstract void Jump();
+}
+
+class Hero: Character
 {
     public static int Money = 500;
 
-    public String Name;
-    public int Hp;
     public Sword Sword;
 
     public Hero(string name)
@@ -60,6 +89,11 @@ class Hero
         {
             hero.Hp -= Sword.attack;
         }
+    }
+
+    public override void Jump()
+    {
+        throw new NotImplementedException();
     }
 }
 
