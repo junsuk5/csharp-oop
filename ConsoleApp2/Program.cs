@@ -34,6 +34,16 @@ Hero.SetMoney(100);
 List<IItem> items = new List<IItem>();
 items.Add(new House());
 items.Add(new Sword("dd"));
+List<IWeapon> weapons = new List<IWeapon>();
+
+weapons.ForEach((weapon) =>
+{
+    if (typeof(Gun) == weapon.GetType())
+    {
+        ((Gun)weapon).something();
+    }
+    weapon.fire();
+});
 
 class Medic
 {
@@ -51,13 +61,21 @@ class Ghost
     }
 }
 
+
 interface IWeapon
 {
-    
+    public void fire();
 }
 class Gun: IWeapon
 {
-    
+    public void something()
+    {
+        
+    }
+    public void fire()
+    {
+        throw new NotImplementedException();
+    }
 }
 class Soldier
 {
