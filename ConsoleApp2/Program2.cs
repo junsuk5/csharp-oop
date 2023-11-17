@@ -1,21 +1,47 @@
 namespace ConsoleApp2;
 
-abstract class TangibleAsset
+interface IThing
+{
+    public double GetWeight();
+    public void SetWeight(double weight);
+}
+
+abstract class Asset
 {
     private string _name;
     private int _price;
-    private string _color;
 
-    public TangibleAsset(string name, int price, string color)
+    protected Asset(string name, int price)
     {
         _name = name;
         _price = price;
-        _color = color;
     }
 
     public string Name => _name;
     public int Price => _price;
+}
+
+abstract class TangibleAsset : Asset, IThing
+{
+    private string _color;
+    private double _weight;
+
     public string Color => _color;
+
+    protected TangibleAsset(string name, int price, string color) : base(name, price)
+    {
+        _color = color;
+    }
+
+    public double GetWeight()
+    {
+        return _weight;
+    }
+
+    public void SetWeight(double weight)
+    {
+        _weight = weight;
+    }
 }
 
 class Book : TangibleAsset
@@ -30,23 +56,14 @@ class Book : TangibleAsset
     }
 }
 
-class Computer 
+class Computer : TangibleAsset
 {
-    private string _name;
-    private int _price;
-    private string _color;
     private string _makerName;
 
-    public Computer(string name, int price, string color, string makerName)
-    {
-        _name = name;
-        _price = price;
-        _color = color;
-        _makerName = makerName;
-    }
-
-    public string Name => _name;
-    public int Price => _price;
-    public string Color => _color;
     public string MakerName => _makerName;
+
+    public Computer(string name, int price, string color, string makerName) : base(name, price, color)
+    {
+        this._makerName = makerName;
+    }
 }

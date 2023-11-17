@@ -1,4 +1,20 @@
-﻿var hero = new Hero("슈퍼맨");
+﻿using ConsoleApp2;
+
+var computer = new Computer("삼성컴퓨터", 10000, "Red", "삼성");
+Book book = new Book("생존코딩", 40000, "Blue", "123123");
+
+TangibleAsset tangibleAsset1 = computer;
+TangibleAsset tangibleAsset2 = book;
+TangibleAsset tangibleAsset3 = new Book("11", 400, "11", "11");
+
+List<TangibleAsset> assets = new List<TangibleAsset>();
+
+assets.ForEach((asset) => Console.WriteLine(asset.Name));
+
+computer.GetWeight();
+computer.SetWeight(10);
+
+var hero = new Hero("슈퍼맨");
 
 hero.Sword = new Sword("불의 검");
 
@@ -15,10 +31,51 @@ Console.WriteLine(hero2.Hp);
 
 Hero.SetMoney(100);
 
+List<IItem> items = new List<IItem>();
+items.Add(new House());
+items.Add(new Sword("dd"));
+
+class Medic
+{
+    public void Heal(IBionic bionic)
+    {
+        
+    }
+}
+
+class Ghost
+{
+    public void Emp(IMechanic mechanic)
+    {
+        
+    }
+}
+
+interface IWeapon
+{
+    
+}
+class Gun: IWeapon
+{
+    
+}
+class Soldier
+{
+    public IWeapon Weapon;
+}
+
+interface IBionic {}
+interface IMechanic {}
+
+class Scv: IBionic, IMechanic
+{
+    
+}
+
 class SuperHero : Hero
 {
     public bool IsFly = false;
-    
+
     public SuperHero(string name) : base(name)
     {
     }
@@ -30,12 +87,12 @@ class SuperHero : Hero
         if (IsFly)
         {
             Console.WriteLine("퍼버벅!!!");
-            hero.Hp -= 5;    
+            hero.Hp -= 5;
         }
     }
 }
 
-class Wizard: Character, ICharacter
+class Wizard : Character, ICharacter
 {
     public override void Jump()
     {
@@ -47,6 +104,7 @@ class Wizard: Character, ICharacter
         throw new NotImplementedException();
     }
 }
+
 interface ICharacter
 {
     public void Jump();
@@ -57,7 +115,7 @@ abstract class Character
 {
     public String Name;
     public int Hp;
-    
+
     public void Run()
     {
         Console.WriteLine("우다다다");
@@ -66,7 +124,7 @@ abstract class Character
     public abstract void Jump();
 }
 
-class Hero: Character
+class Hero : Character
 {
     public static int Money = 500;
 
@@ -97,7 +155,12 @@ class Hero: Character
     }
 }
 
-class Sword
+interface IItem
+{
+    
+}
+
+class Sword: IItem
 {
     public String name;
     public int attack = 50;
@@ -107,3 +170,9 @@ class Sword
         this.name = name;
     }
 }
+
+class House: IItem
+{
+    
+}
+
